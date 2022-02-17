@@ -1,13 +1,15 @@
 <template lang="pug">
   .component
     button.relative.button.inline-block.px-5.bg-blue-600.text-white.rounded-xl(@click="fetchSeasonsTournament") Get data
-    .stats-table.text-left.text-sm.grid.grid-cols-1(v-if="playerId && seasonTournamentIds")
-      h4.text-white.text-xl.col-span-1 {{ playerName }}
-      .cols-comparison(v-if="isLoaded", v-for="(value, statName) in statNames" :key="value")
-        .stat-legend.mx-1.py-3 {{ value }}
-        .stat-value.mx-1.py-2(v-for="(value, i) in overallStatByMatch[statName]" :key="i")
-          span.range {{ statName.includes('Percentage') ? `${value} %` : value }}
-            span.range-width(v-if="Object.keys(overallWidth).length > 0", :style="{ width: overallWidth[statName][i] + '%' }")
+    //- .stats-table.text-left.text-sm.grid.grid-cols-1(v-if="playerId && seasonTournamentIds")
+    .dot-block(:style={ bottom: statY; left: statX})
+      h4.text-white.text-sm.col-span-1 {{ playerName }}
+      span.dot
+      //- .cols-comparison(v-if="isLoaded", v-for="(value, statName) in statNames" :key="value")
+      //-   .stat-legend.mx-1.py-3 {{ value }}
+      //-   .stat-value.mx-1.py-2(v-for="(value, i) in overallStatByMatch[statName]" :key="i")
+      //-     span.range {{ statName.includes('Percentage') ? `${value} %` : value }}
+      //-       span.range-width(v-if="Object.keys(overallWidth).length > 0", :style="{ width: overallWidth[statName][i] + '%' }")
 </template>
 
 <script>
@@ -249,36 +251,6 @@ export default {
   }
   h4 {
     min-height: 65px;
-  }
-  .stat-legend {
-    min-height: 50px;
-    font-size: 13px;
-    color: rgba($color: #fff, $alpha: 0.85);
-    display: flex;
-    align-items: flex-end;
-    line-height: 1;
-  }
-  .stat-value {
-    position: relative;
-    text-align: left;
-    padding-left: 5px;
-    font-size: 16px;
-    font-family: 'Open Sans Condensed', sans-serif;
-    .range {
-      &-width {
-        width: 100%;
-        height: 75%;
-        display: block;
-        border-radius: 8px;
-        position: absolute;
-        z-index: -1;
-        transform: translate(-5px, -93%);
-      }
-    }
-  }
-  .matches,
-  .touches {
-    // max-width: 62px;
   }
 }
 </style>

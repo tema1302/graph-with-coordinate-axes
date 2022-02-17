@@ -1,6 +1,8 @@
 <template lang="pug">
-.container-fluid.px-10.mx-auto
-  .min-h-screen.flex.items-start.justify-center
+.container-fluid.p-10.min-h-screen.grid
+  .axes
+    .axes--x
+    .axes--y
     User(v-for="(id, name, idx) in users" :playerId="id" :playerName="name" :key="idx")
 </template>
 
@@ -12,7 +14,7 @@ export default {
   data() {
     return {
       users: {
-        'TS': 33541,
+        'Тьяго Силва': 33541,
       },
     }
   },
@@ -21,7 +23,14 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Tenor+Sans&family=Open+Sans+Condensed:wght@300&display=swap');
+@mixin line($lineWidthName) {
+  display: block;
+  position: absolute;
+  #{$lineWidthName}: 2px;
+  background-color: rgba($color: #222, $alpha: 0.5);
+}
 
+// @import url('../static/mixins');
 .container-fluid {
   // background-image: url('./static/123.jpg');
   background-repeat: no-repeat;
@@ -39,6 +48,23 @@ export default {
     background: rgba($color: #222, $alpha: 0.5);
     // backdrop-filter: blur(1px);
     position: fixed;
+  }
+}
+
+.axes {
+  position: relative;
+  height: 100%;
+  &--x {
+    @include line('height');
+    right: 0;
+    bottom: 0;
+    left: -15px;
+  }
+  &--y {
+    @include line('width');
+    top: 0;
+    bottom: -15px;
+    left: 0;
   }
 }
 </style>
